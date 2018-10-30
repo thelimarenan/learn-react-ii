@@ -1,0 +1,9 @@
+.foto-usuario img {
+    overflow: hidden;
+    border-radius: 10px;
+    border: solid 1px #8899FF;
+}
+
+.foto-src {
+    min-height: 300px;
+}
