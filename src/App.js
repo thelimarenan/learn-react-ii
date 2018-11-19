@@ -1,10 +1,5 @@
 import React, { Component } from 'react';
 
-import './css/reset.css';
-import './css/timeline.css';
-import './css/login.css';
-import './css/custom.css';
-
 import Header from './componentes/Header';
 import Timeline from './componentes/Timeline';
 
@@ -14,7 +9,7 @@ class App extends Component {
     <div id="root">
       <div className="main">
         <Header/>
-        <Timeline/>
+        <Timeline login={this.props.params.login}/>
       </div>
     </div>
     );
