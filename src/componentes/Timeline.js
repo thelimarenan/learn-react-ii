@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
+import TimelineApi from '../logicas/TimelineApi';
 import FotoItem from './FotoItem';
 
 export default class Timeline extends Component {
@@ -12,17 +13,13 @@ export default class Timeline extends Component {
     }
 
     componentWillMount() {
-        this.props.store.subscribe((fotos) => {
+        this.props.store.subscribe(() => {
             this.setState({fotos: this.props.store.getState()});
         });
     }
 
     componentDidMount(){
         this.carregaFotos();
-
-        const listaFixa = [{"urlPerfil":"https://s3.amazonaws.com/caelum-online-public/react-native-parte-2/images/adittional-resources/profile-photo-alberto.jpg","loginUsuario":"alots","horario":"30/01/2019 14:51","urlFoto":"https://s3.amazonaws.com/caelum-online-public/react-native-parte-2/images/adittional-resources/photo-1.jpg","id":1,"likeada":false,"likers":[],"comentarios":[],"comentario":"Legenda da foto"},{"urlPerfil":"https://s3.amazonaws.com/caelum-online-public/react-native-parte-2/images/adittional-resources/profile-photo-alberto.jpg","loginUsuario":"alots","horario":"30/01/2019 14:51","urlFoto":"https://s3.amazonaws.com/caelum-online-public/react-native-parte-2/images/adittional-resources/photo-2.jpg","id":2,"likeada":false,"likers":[],"comentarios":[],"comentario":"Legenda da foto"}];
-
-        this.props.store.dispatch({type: "LISTAGEM", fotos: listaFixa});
     }
 
     componentWillReceiveProps(nextProps) {
@@ -39,7 +36,7 @@ export default class Timeline extends Component {
             urlPerfil = `https://instalura-api.herokuapp.com/api/public/fotos/${this.login}`;
         }
 
-        // this.props.store.listaFotos(urlPerfil);
+        this.props.store.dispatch(TimelineApi.listaFotos(urlPerfil));
     }
 
     like(fotoId) {

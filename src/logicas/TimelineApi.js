@@ -1,18 +1,17 @@
 import Pubsub from 'pubsub-js';
 
-export default class TimelineStore {
-    constructor(fotos) {
-        this.fotos = fotos;
-    }
+export default class TimelineApi {
 
-    listaFotos(urlPerfil) {
-        fetch(urlPerfil)
-            .then(response => response.json())
-            .then(fotos => {
-                this.fotos = fotos;
-                Pubsub.publish('timeline', this.fotos);
-            }
-        );
+    static listaFotos(urlPerfil) {
+        return dispatch => {
+            fetch(urlPerfil)
+                .then(response => response.json())
+                .then(fotos => {
+                    dispatch({type: "LISTAGEM", fotos});
+                    return fotos;
+                }
+            );
+        }
     }
 
     like(fotoId) {

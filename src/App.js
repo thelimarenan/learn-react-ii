@@ -1,23 +1,13 @@
 import React, { Component } from 'react';
 
-import TimelineStore from './logicas/TimelineStore';
 import Header from './componentes/Header';
 import Timeline from './componentes/Timeline';
-import {createStore} from 'redux';
+import { timeline } from './reducers/timeline';
+import thunkMiddleware from 'redux-thunk';
+import {createStore,applyMiddleware} from 'redux';
 
-const timelineStore = new TimelineStore([]);
 
-
-// REDUCER
-function timeline(state = [], action) {
-  if(action.type === "LISTAGEM") {
-    return action.fotos;
-  }
-
-  return state;
-}
-
-const store = createStore(timeline);
+const store = createStore(timeline,applyMiddleware(thunkMiddleware));
 
 class App extends Component {
   render() {
