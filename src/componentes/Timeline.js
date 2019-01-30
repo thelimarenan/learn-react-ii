@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
-import LogicaTimeline from '../logicas/LogicaTimeline';
 import FotoItem from './FotoItem';
 
 export default class Timeline extends Component {
@@ -10,11 +9,10 @@ export default class Timeline extends Component {
         super(props);
         this.state = {fotos: []};
         this.login = props.login;
-        this.logicaTimeline = new LogicaTimeline([]);
     }
 
     componentWillMount() {
-        this.logicaTimeline.subscribe((fotos) => {
+        this.props.store.subscribe((fotos) => {
             this.setState({fotos: fotos})
         });
     }
@@ -37,15 +35,15 @@ export default class Timeline extends Component {
             urlPerfil = `https://instalura-api.herokuapp.com/api/public/fotos/${this.login}`;
         }
 
-        this.logicaTimeline.listaFotos(urlPerfil);
+        this.props.store.listaFotos(urlPerfil);
     }
 
     like(fotoId) {
-        this.logicaTimeline.like(fotoId);
+        this.props.store.like(fotoId);
     }
 
     comenta(fotoId, comentario) {
-        this.logicaTimeline.comenta(fotoId, comentario);
+        this.props.store.comenta(fotoId, comentario);
     }
 
     render(){
