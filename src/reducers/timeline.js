@@ -7,7 +7,7 @@ export function timeline(state = [], action) {
       const fotoAchada = state.find(foto => foto.id === action.fotoId);
       fotoAchada.comentarios.push(action.novoComentario);
       
-      return state
+      return state;
     }
 
     if(action.type === "LIKE") {

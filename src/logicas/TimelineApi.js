@@ -1,5 +1,3 @@
-import Pubsub from 'pubsub-js';
-
 export default class TimelineApi {
 
     static listaFotos(urlPerfil) {
@@ -57,13 +55,8 @@ export default class TimelineApi {
                 }
             }).then(novoComentario => {
                 dispatch({type: "COMENTARIO",fotoId, novoComentario});
+                return novoComentario;
             });
         }
-    }
-
-    subscribe(callback) {
-        Pubsub.subscribe('timeline',(topico,fotos) => {
-            callback(fotos);
-        });
     }
 }
